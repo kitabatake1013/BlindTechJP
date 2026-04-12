@@ -1,16 +1,12 @@
 actors:
-  alice:
-    image_url: /images/actors/alice.png
-    name: alice
-    url: http://sns.example.com/alice
-  bob:
-    image_url: /images/actors/bob.png
-    name: bob
-    url: http://sns.example.com/bob
-author: alice
-description: Example description
-description_long: Example long description
-email: info@example.com
+  北畠一翔:
+    image_url:
+    name: 北畠一翔
+    url: https://www.kitabatake1013.jp/
+author: 北畠一翔
+description: 視覚障害者向けテクノロジーポッドキャスト
+description_long: 全盲のパーソナリティー・北畠一翔が、視覚障害関連のテクノロジーについてお届けするポッドキャストです。見えなくても使える便利なソフトウェアや機器のデモンストレーション、視覚障害者の間で話題になっている最新ニュースなど、日々の生活や情報収集に役立つさまざまなテーマを取り上げていきます。
+email: podcast@kitabatake1013.jp
 exclude:
   - docker
   - docker-compose.yml
@@ -20,14 +16,14 @@ exclude:
   - README.md
   - vendor
 google_analytics:
-hashtag: examplehashtag
+hashtag:
 itunes_podcast_url:
-keywords: comma,separated,keywords
+keywords:
 language: ja
 markdown: kramdown
 permalink: /episode/:title
 sass:
   sass_dir: css
 timezone: Asia/Tokyo
-title: Example title
-url: http://example.com
+title: Blind Tech JP
+url: https://podcast.kitabatake1013.jp
