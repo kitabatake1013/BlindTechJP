@@ -41,7 +41,7 @@
             </p>
             <h3>
               出演者
-            </h2>
+            </h3>
             <div class="article-actors">
               {% for actor_id in page.actor_ids %}
                 {% assign actor = site.actors[actor_id] %}
@@ -53,6 +53,21 @@
               {% endfor %}
             </div>
             {{ content }}
+            <h3>
+              【メッセージをお待ちしています】
+            </h3>
+            <p>
+              番組をお聞きになってのご意見やご感想、取り上げてほしい話題などは、ぜひ電子メールにてお知らせください。いただいたメッセージは、番組内でご紹介させていただく可能性があります。
+            </p>
+            <p>
+              宛先：<a href="mailto:podcast@kitabatake1013.jp">podcast@kitabatake1013.jp</a>
+            </p>
+            <h3>
+              注意事項
+            </h3>
+            <p>
+              番組内でご紹介する内容は、制作時点での制作者個人の理解と経験に基づいています。内容に誤りが含まれたり、時間の経過と共に仕様や状況が変化したりする可能性がありますので、あらかじめご了承ください。
+            </p>
           </section>
           <footer class="article-footer">
             <a class="twitter-share-button" href="https://twitter.com/intent/tweet?hashtags={{ site.hashtag }}&url={{ site.github.url }}{{ page.url }}&text={{ page.title }}">
