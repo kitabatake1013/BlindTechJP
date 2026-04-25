@@ -15,6 +15,7 @@ exclude:
   - LICENSE.txt
   - README.md
   - vendor
+  - tools
 google_analytics:
 hashtag:
 itunes_podcast_url:
