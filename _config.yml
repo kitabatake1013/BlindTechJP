@@ -18,7 +18,7 @@ exclude:
   - tools
 google_analytics:
 hashtag:
-itunes_podcast_url:
+itunes_podcast_url: https://podcasts.apple.com/jp/podcast/blind-tech-jp/id1896710970
 keywords:
 language: ja
 markdown: kramdown
