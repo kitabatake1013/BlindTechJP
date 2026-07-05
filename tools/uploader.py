@@ -10,6 +10,7 @@ from mutagen.mp3 import MP3
 AUDIO_DIR = Path("audio")
 ARTICLE_DIR = Path("_posts")
 FILENAME_PATTERN = re.compile(r"btj(\d+)\.mp3")
+MAX_FILE_SIZE = 100 * 1024 * 1024  # GitHubにアップロードできる上限（100MB）
 
 parser = ArgumentParser(description="Blind Tech JPの音声データと、それを再生するための記事をアップロードします。")
 parser.add_argument("file", help="オーディオファイルのパス（リポジトリ外にあってもかまいません）")
@@ -21,6 +22,9 @@ if not file.exists():
 	exit(1)
 elif not re.fullmatch(FILENAME_PATTERN, file.name):
 	print(f"ファイル名の形式が不正です: {file.name}")
+	exit(1)
+elif file.stat().st_size >= MAX_FILE_SIZE:
+	print(f"ファイルサイズが100MB以上のため、GitHubにアップロードできません: {file.stat().st_size / 1024 / 1024:.1f}MB")
 	exit(1)
 
 target_file = AUDIO_DIR / file.name
