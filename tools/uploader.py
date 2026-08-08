@@ -9,18 +9,19 @@ from mutagen.mp3 import MP3
 
 AUDIO_DIR = Path("audio")
 ARTICLE_DIR = Path("_posts")
-FILENAME_PATTERN = re.compile(r"btj(\d+)\.mp3")
+FILENAME_PATTERN = re.compile(r"btj(ex)?(\d+)\.mp3")  # 号外は btjex01.mp3 のように ex を付与する
 MAX_FILE_SIZE = 100 * 1024 * 1024  # GitHubにアップロードできる上限（100MB）
 
 parser = ArgumentParser(description="Blind Tech JPの音声データと、それを再生するための記事をアップロードします。")
 parser.add_argument("file", help="オーディオファイルのパス（リポジトリ外にあってもかまいません）")
 args = parser.parse_args()
 file = Path(args.file)
+match = re.fullmatch(FILENAME_PATTERN, file.name)
 
 if not file.exists():
 	print(f"指定されたファイルが見つかりません: {file.absolute()}")
 	exit(1)
-elif not re.fullmatch(FILENAME_PATTERN, file.name):
+elif not match:
 	print(f"ファイル名の形式が不正です: {file.name}")
 	exit(1)
 elif file.stat().st_size >= MAX_FILE_SIZE:
@@ -33,8 +34,11 @@ if not target_file.exists():
 	print(f"{file.name}をコピーしました。")
 
 now = datetime.now()
-progNum = re.match(FILENAME_PATTERN, file.name).group(1)
-articlePath = ARTICLE_DIR / f"{now:%Y-%m-%d}-{progNum}.md"
+is_special = match.group(1) is not None
+num = match.group(2)
+slug = f"{match.group(1) or ''}{num}"
+titlePrefix = f"号外{int(num)}" if is_special else f"#{num}"
+articlePath = ARTICLE_DIR / f"{now:%Y-%m-%d}-{slug}.md"
 
 # 記事の各行に記載する内容のリスト（改行コードは入れない）
 lines = [
@@ -47,7 +51,7 @@ lines = [
 	"description: ",
 	f"duration: \"{timedelta(seconds=MP3(target_file).info.length)}\"",
 	"layout: article",
-	f"title: \"#{progNum} \"",
+	f"title: \"{titlePrefix} \"",
 	"---",
 ]
 with open(articlePath, "w", encoding="utf-8", newline="\n") as f:
