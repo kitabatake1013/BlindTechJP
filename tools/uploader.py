@@ -9,7 +9,7 @@ from mutagen.mp3 import MP3
 
 AUDIO_DIR = Path("audio")
 ARTICLE_DIR = Path("_posts")
-FILENAME_PATTERN = re.compile(r"btj(ex)?(\d+)\.mp3")  # 号外は btjex01.mp3 のように ex を付与する
+FILENAME_PATTERN = re.compile(r"btj(ex)?(\d{3})\.mp3")  # 本編: btj001.mp3 / 号外: btjex001.mp3（いずれも3桁）
 MAX_FILE_SIZE = 100 * 1024 * 1024  # GitHubにアップロードできる上限（100MB）
 
 parser = ArgumentParser(description="Blind Tech JPの音声データと、それを再生するための記事をアップロードします。")
@@ -37,7 +37,7 @@ now = datetime.now()
 is_special = match.group(1) is not None
 num = match.group(2)
 slug = f"{match.group(1) or ''}{num}"
-titlePrefix = f"号外{int(num)}" if is_special else f"#{num}"
+titlePrefix = f"号外" if is_special else f"#{num}"
 articlePath = ARTICLE_DIR / f"{now:%Y-%m-%d}-{slug}.md"
 
 # 記事の各行に記載する内容のリスト（改行コードは入れない）
