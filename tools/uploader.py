@@ -21,6 +21,9 @@ match = re.fullmatch(FILENAME_PATTERN, file.name)
 if not file.exists():
 	print(f"指定されたファイルが見つかりません: {file.absolute()}")
 	exit(1)
+elif file.suffix.lower() != ".mp3":
+	print(f"mp3ファイルではありません: {file.name}")
+	exit(1)
 elif not match:
 	print(f"ファイル名の形式が不正です: {file.name}")
 	exit(1)
